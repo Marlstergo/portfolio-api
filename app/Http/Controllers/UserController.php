@@ -16,7 +16,7 @@ class UserController extends Controller
     $users = User::all();
     return response()->json([
       'message' => 'Users fetched successfully',
-      'data' => $users
+      'data' => UserResource::collection($users)
     ]);
   }
 
