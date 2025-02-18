@@ -6,27 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
-class AuthenticatedSessionController extends Controller
+class LoginController extends Controller
 {
   /**
    * Handle an incoming authentication request.
    */
-  public function store(LoginRequest $request): JsonResponse
+  public function store(LoginRequest $request): Response
   {
-    // check if Session store is not set on request
-    // dd($request->headers);
-
-    // dd('hi');
     $request->authenticate();
 
     $request->session()->regenerate();
 
-    return response()->json([
-      'user' => $request->user(),
-      'message' => 'Logged in successfully'
-    ]);
+    return response()->noContent();
   }
 
   /**
