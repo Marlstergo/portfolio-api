@@ -14,7 +14,8 @@ class NewsletterUserController extends Controller
    */
   public function index()
   {
-    //
+    $newsletterUsers = NewsletterUser::all();
+    return response()->json($newsletterUsers);
   }
 
   /**
@@ -28,10 +29,10 @@ class NewsletterUserController extends Controller
       "phone" => $request->phone,
       "source" => $request->source,
     ];
-    dd($data);
 
     $request->validate([
       "email" => "required|email",
+      "source" => "required|string",
     ]);
 
     NewsletterUser::create($data);

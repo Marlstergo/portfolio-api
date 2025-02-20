@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\NewsletterUserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -49,13 +50,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/', [TagController::class, 'create']);
   });
 
-  Route::get('/test-event', function () {
-    Log::info('Event is being dispatched');
-    event(new \App\Events\AddToNewsletter([
-        'email' => 'test@example.com',
-        'name' => 'Test User',
-        'phone' => '1234567890',
-        'source' => 'test',
-    ]));
+  Route::prefix('newsletter')->group(function () {
+    Route::post('/', [NewsletterUserController::class, 'store']);
+    Route::get('/', [NewsletterUserController::class, 'index']);
   });
 });
