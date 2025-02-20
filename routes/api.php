@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 // Public auth routes
@@ -46,5 +47,15 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::prefix('tags')->group(function () {
     Route::get('/', [TagController::class, 'index']);
     Route::post('/', [TagController::class, 'create']);
+  });
+
+  Route::get('/test-event', function () {
+    Log::info('Event is being dispatched');
+    event(new \App\Events\AddToNewsletter([
+        'email' => 'test@example.com',
+        'name' => 'Test User',
+        'phone' => '1234567890',
+        'source' => 'test',
+    ]));
   });
 });

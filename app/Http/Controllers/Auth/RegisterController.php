@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\AddToNewsletter;
 use App\Events\Registered;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -56,7 +57,12 @@ class RegisterController extends Controller
       'preferred_language' => $request->string('preferred_language'),
     ]);
 
-    // event(new Registered($user));
+    event(new AddToNewsletter([
+      'email' => $request->email,
+      'name' => $request->name,
+      'phone' => $request->phone,
+      'source' => 'registration',
+    ]));
 
     Auth::login($user);
 
