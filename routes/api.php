@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\ColdMail;
 use App\Http\Controllers\NewsletterUserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TagController;
@@ -54,4 +55,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/', [NewsletterUserController::class, 'store']);
     Route::get('/', [NewsletterUserController::class, 'index']);
   });
+
+  Route::post('/contact', [ColdMail::class, 'SendMail']);
 });
