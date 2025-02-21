@@ -27,6 +27,11 @@ class AddToNewsletterListener
     ['userData' => $event->userData]);
 
     $userData = $event->userData;
+
+    if (NewsletterUser::where('email', $userData['email'])->exists()) {
+      return;
+    }
+
     NewsletterUser::create([
       'email' => $userData['email'],
       'name' => $userData['name'],

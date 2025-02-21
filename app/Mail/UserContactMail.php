@@ -26,7 +26,7 @@ class UserContactMail extends Mailable
   {
     return new Envelope(
       from: new Address('developer@abdulmaliq.dev', 'Portfolio'),
-      replyTo: [new Address($this->data['email'], $this->data['name'])],
+      replyTo: [new Address($this->data['email'], $this->data['first_name'] . ' ' . $this->data['last_name'])],
       subject: 'New Contact Form Submission',
     );
   }

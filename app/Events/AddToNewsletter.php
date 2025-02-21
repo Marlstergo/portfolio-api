@@ -22,7 +22,6 @@ class AddToNewsletter
    */
   public function __construct($userData)
   {
-    Log::info('AddToNewsletter event triggered', ['userData' => $userData]);
     $this->userData = $userData;
   }
 
